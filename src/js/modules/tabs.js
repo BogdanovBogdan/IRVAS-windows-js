@@ -1,4 +1,4 @@
-const tabs = (containerTabsSelector, tabSelector, tabsContentSelector, activeSelector) => {
+const tabs = (containerTabsSelector, tabSelector, tabsContentSelector, activeSelector, display = "block") => {
    const containerTabs = document.querySelector(containerTabsSelector),
          tabs = document.querySelectorAll(tabSelector),
          tabsContent = document.querySelectorAll(tabsContentSelector);
@@ -14,10 +14,12 @@ const tabs = (containerTabsSelector, tabSelector, tabsContentSelector, activeSel
    }
 
    function showTabContent(i = 0) {
-      tabsContent[i].style.width = "110%";
-      tabsContent[i].style.display = "block";
+      tabsContent[i].style.display = display;
       tabs[i].classList.add(activeSelector);
    }
+
+   hideTabsContent();
+   showTabContent();
 
    containerTabs.addEventListener("click", (e) => {
       const target = e.target;
