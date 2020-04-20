@@ -33,6 +33,19 @@ textarea:focus {
   padding: 0 !important;
 }
 
+.fadeIn {
+	animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0.1;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 .form {
   /*margin-top: 2rem;*/
   padding: 2rem 5rem;
