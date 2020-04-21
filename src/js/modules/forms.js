@@ -1,4 +1,5 @@
 import checkNumInputs from "./checkNumInputs";
+import closePopups from "./closePopups";
 
 const forms = (state) => {
    const forms = document.querySelectorAll("form"),
@@ -49,10 +50,11 @@ const forms = (state) => {
          })
          .catch(() => statusMessage.textContent = message.failure)
          .finally(() => {
-            clearInputs();
+				clearInputs();
             setTimeout(() => {
-               statusMessage.remove();
-            }, 5000);
+					statusMessage.remove();
+					closePopups();
+            }, 4000);
          });
       });
       
