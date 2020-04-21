@@ -1,3 +1,5 @@
+import calcScroll from "./calcScrollWidth";
+
 const modals = () => {
 	function bindModals(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
 		const triggers = document.querySelectorAll(triggerSelector),
@@ -52,27 +54,12 @@ const modals = () => {
 		}, time);
 	}
 
-	function calcScroll() {
-		let calcBox = document.createElement("div");
-
-		document.body.appendChild(calcBox);
-		calcBox.style.width = "50px";
-		calcBox.style.height = "50px";
-		calcBox.style.overflowY = "scroll";
-		calcBox.style.visibility = "hidden";
-
-		let widthScroll = calcBox.offsetWidth - calcBox.clientWidth;
-		calcBox.remove();
-
-		return widthScroll;
-	}
-
 	bindModals(".popup_engineer_btn", ".popup_engineer", ".popup_engineer .popup_close");
 	bindModals(".phone_link", ".popup", ".popup .popup_close");
 	bindModals(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
 	bindModals(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
 	bindModals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
-	showModalByTime(".popup", 60000);
+	showModalByTime(".popup", 6000);
 
 };
 
