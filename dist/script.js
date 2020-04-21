@@ -17550,6 +17550,31 @@ window.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
+/***/ "./src/js/modules/calcScrollWidth.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/calcScrollWidth.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function calcScroll() {
+  var calcBox = document.createElement("div");
+  document.body.appendChild(calcBox);
+  calcBox.style.width = "50px";
+  calcBox.style.height = "50px";
+  calcBox.style.overflowY = "scroll";
+  calcBox.style.visibility = "hidden";
+  var widthScroll = calcBox.offsetWidth - calcBox.clientWidth;
+  calcBox.remove();
+  return widthScroll;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (calcScroll);
+
+/***/ }),
+
 /***/ "./src/js/modules/changeModalState.js":
 /*!********************************************!*\
   !*** ./src/js/modules/changeModalState.js ***!
@@ -17760,10 +17785,14 @@ var forms = function forms(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _calcScrollWidth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calcScrollWidth */ "./src/js/modules/calcScrollWidth.js");
+
+
 var images = function images() {
   var imgPopup = document.createElement("div"),
       img = document.createElement("img"),
-      imgContainer = document.querySelector(".works");
+      imgContainer = document.querySelector(".works"),
+      scrollWidth = Object(_calcScrollWidth__WEBPACK_IMPORTED_MODULE_0__["default"])();
   imgPopup.classList.add("popup");
   imgPopup.style.display = "none";
   imgPopup.style.justifyContent = "center";
@@ -17781,11 +17810,13 @@ var images = function images() {
       img.setAttribute("src", path);
       imgPopup.style.display = "flex";
       document.body.style.overflow = "hidden";
+      document.body.style.marginRight = "".concat(scrollWidth, "px");
     }
 
     if (target && target.matches("div.popup")) {
       imgPopup.style.display = "none";
       document.body.style.overflow = "";
+      document.body.style.marginRight = "0px";
     }
   });
 };
@@ -17805,6 +17836,8 @@ var images = function images() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _calcScrollWidth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calcScrollWidth */ "./src/js/modules/calcScrollWidth.js");
+
 
 
 var modals = function modals() {
@@ -17814,7 +17847,7 @@ var modals = function modals() {
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
         allModals = document.querySelectorAll("[data-modal]"),
-        scrollWidth = calcScroll();
+        scrollWidth = Object(_calcScrollWidth__WEBPACK_IMPORTED_MODULE_1__["default"])();
     triggers.forEach(function (item) {
       item.addEventListener("click", function (e) {
         if (e.target) {
@@ -17857,24 +17890,12 @@ var modals = function modals() {
     }, time);
   }
 
-  function calcScroll() {
-    var calcBox = document.createElement("div");
-    document.body.appendChild(calcBox);
-    calcBox.style.width = "50px";
-    calcBox.style.height = "50px";
-    calcBox.style.overflowY = "scroll";
-    calcBox.style.visibility = "hidden";
-    var widthScroll = calcBox.offsetWidth - calcBox.clientWidth;
-    calcBox.remove();
-    return widthScroll;
-  }
-
   bindModals(".popup_engineer_btn", ".popup_engineer", ".popup_engineer .popup_close");
   bindModals(".phone_link", ".popup", ".popup .popup_close");
   bindModals(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
   bindModals(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
   bindModals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
-  showModalByTime(".popup", 60000);
+  showModalByTime(".popup", 6000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);

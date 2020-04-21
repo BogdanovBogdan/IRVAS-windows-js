@@ -1,7 +1,10 @@
+import calcScroll from "./calcScrollWidth";
+
 const images = () => {
 	const imgPopup = document.createElement("div"),
 		img = document.createElement("img"),
-		imgContainer = document.querySelector(".works");
+		imgContainer = document.querySelector(".works"),
+		scrollWidth = calcScroll();
 	
 
 	imgPopup.classList.add("popup");
@@ -27,11 +30,13 @@ const images = () => {
 
 			imgPopup.style.display = "flex";
 			document.body.style.overflow = "hidden";
+			document.body.style.marginRight = `${scrollWidth}px`;
 		}
 
 		if (target && target.matches("div.popup")) {
 			imgPopup.style.display = "none";
 			document.body.style.overflow = "";
+			document.body.style.marginRight = `0px`;
 		}
 	});
 };
