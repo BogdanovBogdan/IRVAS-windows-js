@@ -8,6 +8,7 @@ const images = () => {
 	
 
 	imgPopup.classList.add("popup");
+	imgPopup.setAttribute("data-modal", "");
 	imgPopup.style.display = "none";
 	imgPopup.style.justifyContent = "center";
 	imgPopup.style.alignItems = "center";

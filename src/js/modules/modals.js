@@ -36,6 +36,7 @@ const modals = () => {
 	}
 
 	function showModalByTime(selector, time) {
+		const scrollWidth = calcScroll();
 		setTimeout(() => {
 			let isDisplay;
 			document.querySelectorAll("[data-modal").forEach(item => {
@@ -46,8 +47,8 @@ const modals = () => {
 			
 			if (!isDisplay) {
 				document.querySelector(selector).style.display = "block";
-				document.body.style.overflow = "hidden";
 				document.body.style.marginRight = `${scrollWidth}px`;
+				document.body.style.overflow = "hidden";
 			}
 		}, time);
 	}
@@ -57,7 +58,7 @@ const modals = () => {
 	bindModals(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
 	bindModals(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
 	bindModals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
-	showModalByTime(".popup[data-modal]", 60000);
+	showModalByTime(".popup[data-modalByTime]", 60000);
 };
 
 export default modals;
