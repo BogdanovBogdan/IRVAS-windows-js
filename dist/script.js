@@ -17596,6 +17596,8 @@ var changeModalState = function changeModalState(state) {
       windowHeight = document.querySelectorAll('#height'),
       windowType = document.querySelectorAll('#view_type'),
       windowProfile = document.querySelectorAll(".popup_calc_profile .checkbox");
+  state.type = windowType[0].value; // set default
+
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#width');
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#height');
 
@@ -17627,6 +17629,8 @@ var changeModalState = function changeModalState(state) {
             state[prop] = item.value;
             break;
         }
+
+        console.log('changeModalState: ', state);
       });
     });
   };
@@ -17768,6 +17772,7 @@ var forms = function forms(state) {
   var clearInputs = function clearInputs() {
     inputs.forEach(function (item) {
       item.value = '';
+      item.checked = false;
     });
   };
 
@@ -17786,8 +17791,12 @@ var forms = function forms(state) {
       }
 
       postData('assets/server.php', formData).then(function (res) {
-        console.log('data = ', res);
+        console.log('success: ', res);
         statusMessage.textContent = message.success;
+
+        for (var _key in state) {
+          delete state[_key];
+        }
       }).catch(function () {
         return statusMessage.textContent = message.failure;
       }).finally(function () {
@@ -17823,6 +17832,7 @@ var images = function images() {
       imgContainer = document.querySelector(".works"),
       scrollWidth = Object(_calcScrollWidth__WEBPACK_IMPORTED_MODULE_0__["default"])();
   imgPopup.classList.add("popup");
+  imgPopup.setAttribute("data-modal", "");
   imgPopup.style.display = "none";
   imgPopup.style.justifyContent = "center";
   imgPopup.style.alignItems = "center";
@@ -17903,10 +17913,20 @@ var modals = function modals() {
   }
 
   function showModalByTime(selector, time) {
+    var scrollWidth = Object(_calcScrollWidth__WEBPACK_IMPORTED_MODULE_1__["default"])();
     setTimeout(function () {
-      document.querySelector(selector).style.display = "block";
-      document.body.style.overflow = "hidden";
-      document.body.style.marginRight = "".concat(scrollWidth, "px");
+      var isDisplay;
+      document.querySelectorAll("[data-modal").forEach(function (item) {
+        if (getComputedStyle(item).display != "none") {
+          isDisplay = true;
+        }
+      });
+
+      if (!isDisplay) {
+        document.querySelector(selector).style.display = "block";
+        document.body.style.marginRight = "".concat(scrollWidth, "px");
+        document.body.style.overflow = "hidden";
+      }
     }, time);
   }
 
@@ -17914,7 +17934,8 @@ var modals = function modals() {
   bindModals(".phone_link", ".popup", ".popup .popup_close");
   bindModals(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
   bindModals(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
-  bindModals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false); // showModalByTime(".popup[data-modal]", 6000);
+  bindModals(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
+  showModalByTime(".popup[data-modalByTime]", 60000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
