@@ -18630,12 +18630,8 @@ var changeModalState = function changeModalState(state) {
       windowProfile = document.querySelectorAll(".popup_calc_profile .checkbox");
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#width');
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_1__["default"])('#height');
-  state.form = 0; // set default
-
-  state.type = windowType[0].value; // set default
-  // windowWidth.value == ''
-  // windowHeight
-  // windowProfile
+  state.form = 0;
+  state.type = windowType[0].value;
 
   var bindActionToElems = function bindActionToElems(event, elem, prop) {
     elem.forEach(function (item, i) {
