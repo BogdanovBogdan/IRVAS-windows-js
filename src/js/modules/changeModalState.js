@@ -7,9 +7,11 @@ const changeModalState = (state) => {
 		windowType = document.querySelectorAll('#view_type'),
 		windowProfile = document.querySelectorAll(".popup_calc_profile .checkbox");
 
-	state.type = windowType[0].value; // set default
 	checkNumInputs('#width');
 	checkNumInputs('#height');
+		
+	state.form = 0;
+	state.type = windowType[0].value;
 
 	const bindActionToElems = (event, elem, prop) => {
 		elem.forEach((item, i) => {
@@ -35,8 +37,6 @@ const changeModalState = (state) => {
 						state[prop] = item.value;
 						break;
 				}
-				console.log('changeModalState: ', state);
-				
 			});
 		});
 	};
