@@ -18828,8 +18828,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var closePopups = function closePopups() {
+var closePopups = function closePopups(popupItem) {
   var allPopups = document.querySelectorAll("[data-modal]");
+
+  try {
+    var popup = popupItem.closest("[data-modal]");
+
+    if (getComputedStyle(popup).display === "none") {
+      return;
+    }
+
+    ;
+  } catch (error) {}
+
   allPopups.forEach(function (item) {
     item.style.display = "none";
   });
@@ -18943,8 +18954,8 @@ var forms = function forms(state) {
         clearInputs();
         setTimeout(function () {
           statusMessage.remove();
-          Object(_closePopups__WEBPACK_IMPORTED_MODULE_6__["default"])();
-        }, 4000);
+          Object(_closePopups__WEBPACK_IMPORTED_MODULE_6__["default"])(item);
+        }, 3000);
       });
     });
   });
